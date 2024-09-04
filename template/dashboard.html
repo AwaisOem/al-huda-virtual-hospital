@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- material-tailwind -->
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+    <!-- font awesome -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- custom css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <style>
+        .navbar {
+            width: 250px;
+            /* min-height:calc(100vh - 20px); */
+            color: #292D32;
+        }
+
+        .navbar ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            list-style: none;
+        }
+
+        .navbar li {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            height: 50px;
+            gap: 1.3rem;
+            padding: 10px 30px;
+            min-width: max-content;
+            position: relative;
+            border-radius: 0.5rem;
+        }
+
+        .navbar li a {
+            margin-top: 5px;
+            opacity: 0.9;
+            flex: 1;
+        }
+
+        .navbar li:hover {
+            cursor: pointer;
+            background-color: hsl(200, 10%, 86%);
+        }
+
+        .navbar li:hover>ul {
+            display: block;
+        }
+
+        /* .navbar li >ul ul{ */
+        /* left: 95% !important; */
+        /* } */
+        .navbar li>ul {
+            display: none;
+            position: absolute;
+            border-radius: 0.5rem;
+            left: 100%;
+            background-color: rgb(243 244 246);
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                width: calc(100% - 20px) !important;
+            }
+        }
+
+        .main-content {
+            width: calc(100% - 270px);
+        }
+    </style>
+    <div class="min-h-screen main flex">
+        <div
+            class="navbar absolute z-50 shadow-md hidden  md:block md:static my-3  min-h-full rounded-r-lg bg-gray-100">
+            <span class="flex text-lg font-bold w-full h-20 justify-center flex items-center gap-2">
+                <i class="fa-solid text-blue-600 fa-hospital h-7"></i>
+                <span class="mt-1">
+                    Al-Huda Hospital
+                </span>
+            </span>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-house"></i>
+                    <a>Home</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-briefcase-medical"></i>
+                    <a>Pharmacy</a>
+                    <i class="fa-solid h-4 opacity-60 fa-angle-right"></i>
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-syringe"></i>
+                            <a>Store</a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <a>Cart</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <a>Doctors</a>
+
+                </li>
+                <li><i class="fa-solid fa-lock"></i>
+                    <a>Admin</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-message"></i>
+                    <a>Chat</a>
+                    <i class="fa-solid h-4 opacity-60 fa-angle-right"></i>
+
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-user"></i>
+                            One
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-user"></i>
+                            Two
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-user"></i>
+                            Three
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-user"></i>
+                            Four
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user"></i>
+                    <a>Profile</a>
+
+                </li>
+            </ul>
+        </div>
+        <div class="main-content flex-col flex h-screen">
+            <div
+                class="w-full z-50 md:shadow-md m-3 px-2 gap-2 items-center h-16 rounded-lg bg-opacity-90 bg-gray-100 backdrop-blur-2xl backdrop-saturate-200 flex justify-between">
+                <span>
+                    <a id="ham" class="hover:bg-gray-200 md:hidden rounded-lg px-3 pt-3 pb-2 cursor-pointer"><i
+                            id="hamicon" class="fa-solid fa-bars h-5"></i></a>
+                </span>
+                <span>
+                    <i class="fa-solid md:hidden text-blue-600 fa-hospital h-7"></i>
+                </span>
+                <span class="text-center">
+                    <!-- <a class="hover:bg-gray-200 rounded-lg px-3 pt-3 pb-2 cursor-pointer"><i
+                            class="h-5 fa-solid fa-cart-shopping"></i></a> -->
+                    <a class="hover:bg-gray-200 rounded-lg px-3 pt-3 pb-2 cursor-pointer"><i
+                            class="h-5 fa-solid fa-bell"></i></a>
+                </span>
+            </div>
+            <div id="main-section" class="mx-3  mb-3 rounded-lg w-full flex-1">
+                <!-- pages -->
+                <section class="home hidden"></section>
+                <section class="pharmacy hidden w-full flex flex-col gap-3">
+                    <form class="w-full  py-2 flex  h-[80px]">
+                        <input type="text"
+                            class="outline-0 px-4 text-sm shadow-md w-full h-full rounded-l-lg bg-gray-100">
+                        <span type="submit"
+                            class="cursor-pointer w-[80px]  shadow-md flex justify-center items-center text-white bg-blue-600 rounded-r-lg  h-full"><i
+                                class="fa-solid fa-magnifying-glass"></i></span>
+                    </form>
+                    <div class=" flex gap-4 flex-wrap  justify-center items-center">
+                        <div
+                            class="w-[250px] shadow-md h-[300px] p-4 flex gap-2 justify-between flex-col rounded-lg bg-gray-100">
+                            <div class="w-full h-[150px] bg-blue-400 rounded-lg"></div>
+                            <div>
+                                <span class="flex justify-between items-center">
+                                    <h1 class="font-bold text-lg">This is title</h1>
+                                    <div>
+                                        <span class="line-through opacity-40 text-xs">$40</span>
+                                        <span class="font-bold">$39</span>
+                                    </div>
+                                </span>
+                                <p class="text-xs opacity-40">Manufecturer</p>
+                            </div>
+                            <span class="flex justify-between gap-5">
+                                <button
+                                    class="w-[30px] flex justify-center items-center text-white h-[30px] rounded-lg  bg-blue-600">-</button>
+                                <div class="font-bold">4</div>
+                                <button
+                                    class="w-[30px] h-[30px] text-white rounded-lg flex justify-center items-center bg-blue-600">+</button>
+                            </span>
+                            <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Add To Cart</button>
+                        </div>
+                        <div class="w-[250px] h-[300px] p-4 flex gap-2 justify-between flex-col rounded-lg bg-gray-100">
+                            <div class="w-full h-[150px] bg-blue-400 rounded-lg"></div>
+                            <div>
+                                <span class="flex justify-between items-center">
+                                    <h1 class="font-bold text-lg">This is title</h1>
+                                    <div>
+                                        <span class="line-through opacity-40 text-xs">$40</span>
+                                        <span class="font-bold">$39</span>
+                                    </div>
+                                </span>
+                                <p class="text-xs opacity-40">Manufecturer</p>
+                            </div>
+                            <span class="flex justify-between gap-5">
+                                <button
+                                    class="w-[30px] flex justify-center items-center text-white h-[30px] rounded-lg  bg-blue-600">-</button>
+                                <div class="font-bold">4</div>
+                                <button
+                                    class="w-[30px] h-[30px] text-white rounded-lg flex justify-center items-center bg-blue-600">+</button>
+                            </span>
+                            <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Add To Cart</button>
+                        </div>
+                        <div class="w-[250px] h-[300px] p-4 flex gap-2 justify-between flex-col rounded-lg bg-gray-100">
+                            <div class="w-full h-[150px] bg-blue-400 rounded-lg"></div>
+                            <div>
+                                <span class="flex justify-between items-center">
+                                    <h1 class="font-bold text-lg">This is title</h1>
+                                    <div>
+                                        <span class="line-through opacity-40 text-xs">$40</span>
+                                        <span class="font-bold">$39</span>
+                                    </div>
+                                </span>
+                                <p class="text-xs opacity-40">Manufecturer</p>
+                            </div>
+                            <span class="flex justify-between gap-5">
+                                <button
+                                    class="w-[30px] flex justify-center items-center text-white h-[30px] rounded-lg  bg-blue-600">-</button>
+                                <div class="font-bold">4</div>
+                                <button
+                                    class="w-[30px] h-[30px] text-white rounded-lg flex justify-center items-center bg-blue-600">+</button>
+                            </span>
+                            <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Add To Cart</button>
+                        </div>
+                        <div class="w-[250px] h-[300px] p-4 flex gap-2 justify-between flex-col rounded-lg bg-gray-100">
+                            <div class="w-full h-[150px] bg-blue-400 rounded-lg"></div>
+                            <div>
+                                <span class="flex justify-between items-center">
+                                    <h1 class="font-bold text-lg">This is title</h1>
+                                    <div>
+                                        <span class="line-through opacity-40 text-xs">$40</span>
+                                        <span class="font-bold">$39</span>
+                                    </div>
+                                </span>
+                                <p class="text-xs opacity-40">Manufecturer</p>
+                            </div>
+                            <span class="flex justify-between gap-5">
+                                <button
+                                    class="w-[30px] flex justify-center items-center text-white h-[30px] rounded-lg  bg-blue-600">-</button>
+                                <div class="font-bold">4</div>
+                                <button
+                                    class="w-[30px] h-[30px] text-white rounded-lg flex justify-center items-center bg-blue-600">+</button>
+                            </span>
+                            <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Add To Cart</button>
+                        </div>
+
+                    </div>
+
+                </section>
+                <section class="cart hidden">
+                    <div class="flex py-7 w-full flex-col gap-5">
+                        <div id="product-cart" class="flex px-5 gap-4 items-center justify-between">
+                            <span class="flex h-16 gap-5">
+                                <div class="rounded-lg h-full bg-gradient-to-tr from-blue-600 to-blue-400 w-16">
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="text-xl">Name Of Product</h3>
+                                    <p class="text-sm opacity-60">Company: Panadol</p>
+                                    <p class="text-sm opacity-60">Price: $78</p>
+                                </div>
+                            </span>
+                            <span class="flex gap-5">
+                                <div class="flex justify-between items-center text-lg w-24 h-8 bg-gray-100 rounded-lg">
+                                    <button class="cursor-pointer w-8 rounded-lg hover:bg-gray-200 text-2xl">+</button>
+                                    <span>56</span>
+                                    <button class="cursor-pointer w-8 rounded-lg hover:bg-gray-200 text-2xl">-</button>
+                                </div>
+                                <button type="button"
+                                    class="h-8 border-0 outline-0 px-2 flex text-white items-center cursor-pointer bg-gradient-to-tr from-red-600 to-red-400 rounded-lg">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div id="product-cart" class="flex px-5 gap-4 items-center justify-between">
+                            <span class="flex h-16 gap-5">
+                                <div class="rounded-lg h-full bg-gradient-to-tr from-blue-600 to-blue-400 w-16">
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="text-xl">Name Of Product</h3>
+                                    <p class="text-sm opacity-60">Company: Panadol</p>
+                                    <p class="text-sm opacity-60">Price: $78</p>
+                                </div>
+                            </span>
+                            <span class="flex gap-5">
+                                <div class="flex justify-between items-center text-lg w-24 h-8 bg-gray-100 rounded-lg">
+                                    <button class="cursor-pointer w-8 rounded-lg hover:bg-gray-200 text-2xl">+</button>
+                                    <span>56</span>
+                                    <button class="cursor-pointer w-8 rounded-lg hover:bg-gray-200 text-2xl">-</button>
+                                </div>
+                                <button type="button"
+                                    class="h-8 border-0 outline-0 px-2 flex text-white items-center cursor-pointer bg-gradient-to-tr from-red-600 to-red-400 rounded-lg">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <hr />
+                        <div class="flex w-full">
+                            <div class="w-[50%] px-4  border-r flex flex-col gap-4 border-gray-200">
+                                <div class="flex justify-between">
+                                    <span>Tax:</span>
+                                    <span>10%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Discount:</span>
+                                    <span>20%</span>
+                                </div>
+                                <div class="font-bold text-xl flex justify-between">
+                                    <span>Total:</span>
+                                    <span>100$</span>
+                                </div>
+                            </div>
+                            <div class="p-4 flex flex-col gap-5 w-[50%]">
+                                <div class="w-full md:w-72">
+                                    <div class="relative h-10 w-full min-w-[200px] ">
+                                        <input
+                                            class="peer h-full w-full rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                                            placeholder=" " />
+                                        <label
+                                            class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-blue-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-blue-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-blue-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                                            Coupon Code
+                                        </label>
+                                    </div>
+                                </div>
+                                <button
+                                    class="w-full font-bold md:w-72 h-12 shadow-mdj shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white">Apply</button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="w-72 mx-auto">
+                            <div class="flex gap-4 w-full">
+                                <input type="radio" name="Payment" id="paypal">
+                                <label for="paypal" class="flex-1">Paypal</label>
+                                <input type="radio" name="Payment" id="card">
+                                <label for="card" class="flex-1">Card</label>
+                                <input type="radio" name="Payment" id="testing">
+                                <label for="testing" class="flex-1">Testing</label>
+                            </div>
+                            <button
+                                class=" my-4 w-full font-bold h-12 rounded-lg bg-gradient-to-tr shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 from-blue-600 to-blue-400 text-white">Buy
+                                ($100)</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="doctors">
+
+                </section>
+                <section class="profile hidden">
+                    <div class="container rounded-lg mx-auto md:mx-0 shadow-md">
+                        <div class="p-4 rounded-lg bg-gray-100">
+                            <div class="flex items-center justify-between w-full ">
+                                <div class="inline-flex items-center space-x-4">
+                                    <a href="#" class="relative block">
+                                        <div
+                                            class="rounded-full bg-blue-300 h-16 flex bg-gradient-to-tr from-blue-600 to-blue-400 items-center justify-center w-16">
+                                            <i class="fa-solid h-7 fa-user "></i>
+                                        </div>
+                                    </a>
+                                    <div>
+                                        <h4>
+                                            User Name
+                                        </h4>
+                                        <span class="opacity-60 text-gray-600">awaisoem@gmail.com</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="center relative inline-block select-none 
+                                bg-gradient-to-tr from-red-600 to-red-400
+                                whitespace-nowrap rounded-lg py-2 h-7 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-white">
+                                    Doctor
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="max-w-full m-3">
+                                <div class="relative right-0">
+                                    <ul class="relative flex list-none flex-wrap rounded-xl bg-blue-gray-50/60 p-1"
+                                        data-tabs="tabs" role="list">
+                                        <li class="z-30 flex-auto text-center">
+                                            <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                                data-tab-target="" active="" role="tab" aria-selected="true"
+                                                aria-controls="records">
+                                                <i class="fa-solid fa-table-list"></i>
+                                                <span class="ml-2">Records</span>
+                                            </a>
+                                        </li>
+                                        <li class="z-30 flex-auto text-center">
+                                            <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                                data-tab-target="" role="tab" aria-selected="false"
+                                                aria-controls="message">
+                                                <i class="fa-solid fa-message"></i>
+                                                <span class="ml-2">Messages</span>
+                                                <span class="ml-2 rounded-full h-2 w-2 bg-red-600"></span>
+                                            </a>
+                                        </li>
+                                        <li class="z-30 flex-auto text-center">
+                                            <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                                data-tab-target="" role="tab" aria-selected="false"
+                                                aria-controls="settings">
+                                                <i class="fa-solid fa-gear"></i>
+                                                <span class="ml-2">Settings</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div data-tab-content="" class="p-5">
+                                        <div class="block opacity-100" id="records" role="tabpanel">
+                                            <!-- ====== Table Section Start -->
+                                            <section class="">
+                                                <div class=" container mx-auto">
+                                                    <div class=" -mx-4 flex flex-wrap">
+                                                        <div class="w-full px-4">
+                                                            <div class="rounded-lg max-w-full overflow-x-auto">
+                                                                <table class=" w-full table-auto">
+                                                                    <thead>
+                                                                        <tr
+                                                                            class="bg-gradient-to-tr from-blue-600 to-blue-400 text-center">
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                TLD
+                                                                            </th>
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                Duration
+                                                                            </th>
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                Registration
+                                                                            </th>
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                Renewal
+                                                                            </th>
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                Transfer
+                                                                            </th>
+                                                                            <th
+                                                                                class="w-1/6 min-w-[160px] border-r border-transparent py-4 px-3 text-lg font-semibold text-white lg:py-7 lg:px-4">
+                                                                                Register
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td
+                                                                                class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                .com
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                1 Year
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $75.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                $5.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $10.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-r border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="border-primary text-primary hover:bg-primary inline-block rounded border py-2 px-6 hover:text-white">
+                                                                                    Sign Up
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td
+                                                                                class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                .com
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                1 Year
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $75.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                $5.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $10.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-r border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="border-primary text-primary hover:bg-primary inline-block rounded border py-2 px-6 hover:text-white">
+                                                                                    Sign Up
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td
+                                                                                class="text-dark border-b border-l border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                .com
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                1 Year
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $75.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                $5.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-[#E8E8E8] bg-[#F3F6FF] py-5 px-2 text-center text-base font-medium">
+                                                                                $10.00
+                                                                            </td>
+                                                                            <td
+                                                                                class="text-dark border-b border-r border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                                                                                <a href="javascript:void(0)"
+                                                                                    class="border-primary text-primary hover:bg-primary inline-block rounded border py-2 px-6 hover:text-white">
+                                                                                    Sign Up
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                            <!-- ====== Table Section End -->
+                                        </div>
+                                        <div class="hidden opacity-0" id="message" role="tabpanel">
+                                            <p
+                                                class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                                The reading of all good books is like a conversation with the finest
+                                                minds of past centuries.
+                                            </p>
+                                        </div>
+                                        <div class="hidden opacity-0" id="settings" role="tabpanel">
+                                            <p
+                                                class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                            <h2 class="px-4 mb-3">
+                                                Change password
+                                            </h2>
+                                            <div class="w-full mb-8 px-5 space-y-5 md:inline-flex">
+                                                <div class=" relative w-full">
+                                                    <input type="text" id="user-info-password"
+                                                        class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                                        placeholder="Current Password" />
+                                                    <input type="text" id="user-info-password"
+                                                        class=" rounded-lg border-transparent mt-3 flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                                        placeholder=" New Password" />
+                                                    <input type="text" id="user-info-password"
+                                                        class=" rounded-lg border-transparent mt-3 flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                                        placeholder="Confirm Password" />
+                                                </div>
+                                            </div>
+                                            <div class="w-full px-4 pb-4 mx-auto text-gray-500 md:w-1/3">
+                                                <button type="submit"
+                                                    class="py-2 px-4
+                                                bg-gradient-to-tr from-blue-600 to-blue-400
+                                                text-white w-full shadow-blue-500/20
+                                                hover:shadow-lg hover:shadow-blue-500/40 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none rounded-lg ">
+                                                    Save
+                                                </button>
+                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+
+                        </div>
+                    </div>
+                </section>
+                <section class="managing-panel hidden">
+                    <div class="w-2/3">
+                        <div class="relative right-0">
+                            <ul class="relative flex list-none flex-wrap rounded-xl bg-blue-gray-50/60 p-1"
+                                data-tabs="tabs" role="list">
+                                <li class="z-30 flex-auto text-center">
+                                    <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                        data-tab-target="" active="" role="tab" aria-selected="true"
+                                        aria-controls="doctors">
+                                        <span class="ml-1">Doctors</span>
+                                    </a>
+                                </li>
+                                <li class="z-30 flex-auto text-center">
+                                    <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                        data-tab-target="" role="tab" aria-selected="false" aria-controls="users">
+                                        <span class="ml-1">Users</span>
+                                    </a>
+                                </li>
+                                <li class="z-30 flex-auto text-center">
+                                    <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                        data-tab-target="" role="tab" aria-selected="false" aria-controls="medicines">
+                                        <span class="ml-1">Medicines</span>
+                                    </a>
+                                </li>
+                                <li class="z-30 flex-auto text-center">
+                                    <a class="text-slate-700 z-30 mb-0 flex w-full cursor-pointer items-center justify-center rounded-lg border-0 bg-inherit px-0 py-1 transition-all ease-in-out"
+                                        data-tab-target="" role="tab" aria-selected="false" aria-controls="sales">
+                                        <span class="ml-1">Sales</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div data-tab-content="" class="p-5">
+                                <div class="block opacity-100" id="doctors" role="tabpanel">
+                                    <p
+                                        class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                        Because it's about motivating the doers. Because I'm here to follow
+                                        my dreams and inspire other people to follow their dreams, too.
+                                    </p>
+                                </div>
+                                <div class="hidden opacity-0" id="users" role="tabpanel">
+                                    <p
+                                        class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                        The reading of all good books is like a conversation with the finest
+                                        minds of past centuries.
+                                    </p>
+                                </div>
+                                <div class="hidden opacity-0" id="medicines" role="tabpanel">
+                                    <p
+                                        class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                        Comparing yourself to others is the thief of joy.
+                                    </p>
+                                </div>
+                                <div class="hidden opacity-0" id="sales" role="tabpanel">
+                                    <p
+                                        class="block font-sans text-base font-light leading-relaxed text-inherit text-blue-gray-500 antialiased">
+                                        Comparing yourself to asdasdothers is the thief of joy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="../node_modules/@material-tailwind/html/scripts/tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ham').click(function () {
+                $('.navbar').toggleClass('hidden');
+                if ($("#hamicon").hasClass("fa-bars")) {
+                    $("#hamicon").removeClass("fa-bars").addClass("fa-xmark");
+                } else {
+                    $("#hamicon").removeClass("fa-xmark").addClass("fa-bars");
+                }
+            });
+            $('#main-section').click(function () {
+                if (!$('.navbar').hasClass('hidden'))
+                    $('.navbar').addClass('hidden');
+                if ($("#hamicon").hasClass("fa-xmark")) {
+                    $("#hamicon").removeClass("fa-xmark").addClass("fa-bars");
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
